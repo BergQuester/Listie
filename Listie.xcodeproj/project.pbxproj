@@ -8,13 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		FE402EA52B0488470090EEC0 /* ListieApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE402EA42B0488470090EEC0 /* ListieApp.swift */; };
-		FE402EA72B0488470090EEC0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE402EA62B0488470090EEC0 /* ContentView.swift */; };
 		FE402EA92B0488480090EEC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE402EA82B0488480090EEC0 /* Assets.xcassets */; };
 		FE402EAD2B0488480090EEC0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FE402EAC2B0488480090EEC0 /* Preview Assets.xcassets */; };
 		FE402EB72B0488480090EEC0 /* ListieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE402EB62B0488480090EEC0 /* ListieTests.swift */; };
 		FE402EC12B0488480090EEC0 /* ListieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE402EC02B0488480090EEC0 /* ListieUITests.swift */; };
 		FE402EC32B0488480090EEC0 /* ListieUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE402EC22B0488480090EEC0 /* ListieUITestsLaunchTests.swift */; };
-		FE402ED12B048AE40090EEC0 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = FE402ED02B048AE40090EEC0 /* ComposableArchitecture */; };
+		FED940632B0C60B800E3F62F /* RootListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = FED940622B0C60B800E3F62F /* RootListFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,6 @@
 /* Begin PBXFileReference section */
 		FE402EA12B0488470090EEC0 /* Listie.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Listie.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE402EA42B0488470090EEC0 /* ListieApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListieApp.swift; sourceTree = "<group>"; };
-		FE402EA62B0488470090EEC0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		FE402EA82B0488480090EEC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FE402EAA2B0488480090EEC0 /* Listie.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Listie.entitlements; sourceTree = "<group>"; };
 		FE402EAC2B0488480090EEC0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -46,6 +44,7 @@
 		FE402EBC2B0488480090EEC0 /* ListieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE402EC02B0488480090EEC0 /* ListieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListieUITests.swift; sourceTree = "<group>"; };
 		FE402EC22B0488480090EEC0 /* ListieUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListieUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		FED940602B0C5F7200E3F62F /* ListieModules */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = ListieModules; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,7 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE402ED12B048AE40090EEC0 /* ComposableArchitecture in Frameworks */,
+				FED940632B0C60B800E3F62F /* RootListFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,10 +76,12 @@
 		FE402E982B0488470090EEC0 = {
 			isa = PBXGroup;
 			children = (
+				FED940602B0C5F7200E3F62F /* ListieModules */,
 				FE402EA32B0488470090EEC0 /* Listie */,
 				FE402EB52B0488480090EEC0 /* ListieTests */,
 				FE402EBF2B0488480090EEC0 /* ListieUITests */,
 				FE402EA22B0488470090EEC0 /* Products */,
+				FED940612B0C60B800E3F62F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -98,7 +99,6 @@
 			isa = PBXGroup;
 			children = (
 				FE402EA42B0488470090EEC0 /* ListieApp.swift */,
-				FE402EA62B0488470090EEC0 /* ContentView.swift */,
 				FE402EA82B0488480090EEC0 /* Assets.xcassets */,
 				FE402EAA2B0488480090EEC0 /* Listie.entitlements */,
 				FE402EAB2B0488480090EEC0 /* Preview Content */,
@@ -131,6 +131,13 @@
 			path = ListieUITests;
 			sourceTree = "<group>";
 		};
+		FED940612B0C60B800E3F62F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -148,7 +155,7 @@
 			);
 			name = Listie;
 			packageProductDependencies = (
-				FE402ED02B048AE40090EEC0 /* ComposableArchitecture */,
+				FED940622B0C60B800E3F62F /* RootListFeature */,
 			);
 			productName = Listie;
 			productReference = FE402EA12B0488470090EEC0 /* Listie.app */;
@@ -223,7 +230,6 @@
 			);
 			mainGroup = FE402E982B0488470090EEC0;
 			packageReferences = (
-				FE402ECF2B048AE40090EEC0 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = FE402EA22B0488470090EEC0 /* Products */;
 			projectDirPath = "";
@@ -267,7 +273,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE402EA72B0488470090EEC0 /* ContentView.swift in Sources */,
 				FE402EA52B0488470090EEC0 /* ListieApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,22 +633,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		FE402ECF2B048AE40090EEC0 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.4.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		FE402ED02B048AE40090EEC0 /* ComposableArchitecture */ = {
+		FED940622B0C60B800E3F62F /* RootListFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = FE402ECF2B048AE40090EEC0 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
+			productName = RootListFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

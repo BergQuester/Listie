@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
+import RootListFeature
 
 @main
 struct ListieApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootList()
         }
     }
 }
