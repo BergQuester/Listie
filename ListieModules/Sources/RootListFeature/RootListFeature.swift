@@ -6,6 +6,26 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
+
+struct RootListFeature: Reducer {
+    struct State {
+
+    }
+
+    enum Action {
+        case test
+    }
+
+    var body: some ReducerOf<Self> {
+        Reduce { state, action in
+            switch action {
+            case .test:
+                return .none
+            }
+        }
+    }
+}
 
 public struct RootList: View {
     public init() { }
