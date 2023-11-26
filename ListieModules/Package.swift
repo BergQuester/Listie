@@ -19,16 +19,23 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.4.2"),
+        .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
     ],
     targets: [
         .target(
             name: "RootListFeature",
             dependencies: [
+                "Models",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
-        .testTarget(
-            name: "RootListFeatureTests"
-        )
+        .testTarget(name: "RootListFeatureTests"),
+        .target(
+            name: "Models",
+            dependencies: [
+                .product(name: "Tagged", package: "swift-tagged"),
+            ]
+        ),
+        .testTarget(name: "ModelsTests")
     ]
 )

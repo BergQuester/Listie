@@ -6,13 +6,19 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
 import RootListFeature
+import Models
 
 @main
 struct ListieApp: App {
     var body: some Scene {
         WindowGroup {
-            RootList()
+            RootList(store: Store(
+                    initialState: RootListFeature.State(items: []),
+                    reducer: RootListFeature.init
+                )
+            )
         }
     }
 }

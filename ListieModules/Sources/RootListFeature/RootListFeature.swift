@@ -7,20 +7,31 @@
 
 import SwiftUI
 import ComposableArchitecture
+import Models
 
-struct RootListFeature: Reducer {
-    struct State {
 
+public struct RootListFeature: Reducer {
+    public init() { }
+
+    public struct State {
+        public var items: [ListItem]
+
+        public init(items: [ListItem]) {
+            self.items = items
+        }
     }
 
-    enum Action {
-        case test
+    public enum Action {
+        case addItem
     }
 
-    var body: some ReducerOf<Self> {
+    @Dependency(\.uuid) var UUID
+
+    public var body: some ReducerOf<Self> {
         Reduce { state, action in
             switch action {
-            case .test:
+            case .addItem:
+                state.items.append(.init(id: ListItem.ID(UUID()), text: ""))
                 return .none
             }
         }
@@ -28,19 +39,28 @@ struct RootListFeature: Reducer {
 }
 
 public struct RootList: View {
-    public init() { }
-    
+    public init(store: StoreOf<RootListFeature>) {
+        self.store = store
+    }
+
+    let store: StoreOf<RootListFeature>
+
     public var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        WithViewStore(store, observe: \.items) { viewStore in
+            List {
+                ForEach(viewStore.state) { item in
+                    Text(item.text)
+                }
+            }
+            .padding()
         }
-        .padding()
     }
 }
 
 #Preview {
-    RootList()
+    RootList(store: Store(
+            initialState: RootListFeature.State(items: [.init(id: ListItem.ID(.init()), text: "Test")]),
+            reducer: RootListFeature.init
+        )
+    )
 }
