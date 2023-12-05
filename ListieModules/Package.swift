@@ -26,10 +26,18 @@ let package = Package(
             name: "RootListFeature",
             dependencies: [
                 "Models",
+                "RootListItemFeature",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
-        .testTarget(name: "RootListFeatureTests"),
+        .target(
+            name: "RootListItemFeature",
+            dependencies: [
+                "Models",
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+            ]
+        ),
+        .testTarget(name: "RootListItemFeatureTests"),
         .target(
             name: "Models",
             dependencies: [
