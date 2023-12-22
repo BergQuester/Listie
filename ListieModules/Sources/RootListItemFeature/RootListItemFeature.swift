@@ -11,8 +11,8 @@ import Models
 import SwiftUI
 
 @Reducer
-struct RootListItemFeature {
-    struct State: Equatable {
+public struct RootListItemFeature {
+    public struct State: Equatable {
         @BindingState var listItem: ListItem
 
         public init(listItem: ListItem) {
@@ -20,11 +20,11 @@ struct RootListItemFeature {
         }
     }
 
-    enum Action: BindableAction {
+    public enum Action: BindableAction {
         case binding(BindingAction<State>)
     }
 
-    var body: some ReducerOf<RootListItemFeature> {
+    public var body: some ReducerOf<RootListItemFeature> {
         BindingReducer()
     }
 }

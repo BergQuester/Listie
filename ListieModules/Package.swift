@@ -12,10 +12,9 @@ let package = Package(
         .watchOS(.v10),
     ],
     products: [
-        .library(
-            name: "RootListFeature",
-            targets: ["RootListFeature"]
-        ),
+        .library(name: "RootListFeature", targets: ["RootListFeature"]),
+        .library(name: "RootListItemFeature", targets: ["RootListItemFeature"]),
+        .library(name: "Models", targets: ["Models"]),
     ],
     dependencies: [
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "1.5.1"),
@@ -30,6 +29,10 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
+        .testTarget(name: "RootListFeatureTests",
+                    dependencies: [
+                        "RootListFeature"
+                    ]),
         .target(
             name: "RootListItemFeature",
             dependencies: [
@@ -37,7 +40,10 @@ let package = Package(
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
             ]
         ),
-        .testTarget(name: "RootListItemFeatureTests"),
+        .testTarget(name: "RootListItemFeatureTests",
+                   dependencies: [
+                    "RootListItemFeature"
+                   ]),
         .target(
             name: "Models",
             dependencies: [
