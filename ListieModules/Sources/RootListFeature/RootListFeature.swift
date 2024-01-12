@@ -47,22 +47,22 @@ public struct RootList: View {
     @Bindable var store: StoreOf<RootListFeature>
 
     public var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 ForEach(store.state.items) { item in
                     Text(item.text)
                 }
             }
             .padding()
-        }
-        .toolbar {
-            ToolbarItemGroup {
-                HStack {
+            .toolbar {
+                ToolbarItemGroup {
+                    HStack {
 #if os(iOS)
-                    EditButton()
+                        EditButton()
 #endif
-                    Button(action: { store.send(.addItem) } ) {
-                        Label("Add Item", systemImage: "plus")
+                        Button(action: { store.send(.addItem) } ) {
+                            Label("Add Item", systemImage: "plus")
+                        }
                     }
                 }
             }
@@ -72,7 +72,11 @@ public struct RootList: View {
 
 #Preview {
     RootList(store: Store(
-            initialState: RootListFeature.State(items: [.init(id: ListItem.ID(.init()), text: "Test")]),
+            initialState: RootListFeature.State(items: [
+                .init(id: ListItem.ID(.init()), text: "Test"),
+                .init(id: ListItem.ID(.init()), text: "Test2"),
+                .init(id: ListItem.ID(.init()), text: "Test3"),
+            ]),
             reducer: RootListFeature.init
         )
     )
