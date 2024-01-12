@@ -31,10 +31,14 @@ public struct RootListItemFeature {
     }
 }
 
-struct RootListItem: View {
+public struct RootListItem: View {
     @Bindable var store: StoreOf<RootListItemFeature>
 
-    var body: some View {
+    init(store: StoreOf<RootListItemFeature>) {
+        self.store = store
+    }
+    
+    public var body: some View {
         TextField("Untitled Todo", text: $store.listItem.text )
     }
 }

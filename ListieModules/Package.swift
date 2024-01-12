@@ -3,6 +3,11 @@
 
 import PackageDescription
 
+let swiftSettings: [SwiftSetting] = [
+    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+    .unsafeFlags(["-Xfrontend", "-enable-actor-data-race-checks"], .when(configuration: .debug))
+]
+
 let package = Package(
     name: "ListieModules",
     platforms: [
@@ -27,7 +32,8 @@ let package = Package(
                 "Models",
                 "RootListItemFeature",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-            ]
+            ],
+            swiftSettings: swiftSettings
         ),
         .testTarget(name: "RootListFeatureTests",
                     dependencies: [
@@ -38,7 +44,8 @@ let package = Package(
             dependencies: [
                 "Models",
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-            ]
+            ],
+            swiftSettings: swiftSettings
         ),
         .testTarget(name: "RootListItemFeatureTests",
                    dependencies: [
@@ -48,7 +55,8 @@ let package = Package(
             name: "Models",
             dependencies: [
                 .product(name: "Tagged", package: "swift-tagged"),
-            ]
+            ],
+            swiftSettings: swiftSettings
         ),
         .testTarget(name: "ModelsTests")
     ]

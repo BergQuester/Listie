@@ -7,6 +7,8 @@
 
 import SwiftUI
 import ComposableArchitecture
+
+import RootListItemFeature
 import Models
 
 @Reducer
@@ -50,7 +52,7 @@ public struct RootList: View {
         NavigationStack {
             List {
                 ForEach(store.state.items) { item in
-                    Text(item.text)
+                    RootListItem(store: item.text)
                 }
             }
             .padding()
