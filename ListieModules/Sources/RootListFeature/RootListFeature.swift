@@ -13,6 +13,7 @@ import Models
 public struct RootListFeature {
     public init() { }
 
+    @ObservableState
     public struct State {
         public var items: [ListItem]
 
@@ -43,27 +44,25 @@ public struct RootList: View {
         self.store = store
     }
 
-    let store: StoreOf<RootListFeature>
+    @Bindable var store: StoreOf<RootListFeature>
 
     public var body: some View {
-        WithViewStore(store, observe: \.items) { viewStore in
-            NavigationView {
-                List {
-                    ForEach(viewStore.state) { item in
-                        Text(item.text)
-                    }
+        NavigationView {
+            List {
+                ForEach(store.state.items) { item in
+                    Text(item.text)
                 }
-                .padding()
             }
-            .toolbar {
-                ToolbarItemGroup {
-                    HStack {
-                        #if os(iOS)
-                        EditButton()
-                        #endif
-                        Button(action: { viewStore.send(.addItem) } ) {
-                            Label("Add Item", systemImage: "plus")
-                        }
+            .padding()
+        }
+        .toolbar {
+            ToolbarItemGroup {
+                HStack {
+#if os(iOS)
+                    EditButton()
+#endif
+                    Button(action: { store.send(.addItem) } ) {
+                        Label("Add Item", systemImage: "plus")
                     }
                 }
             }

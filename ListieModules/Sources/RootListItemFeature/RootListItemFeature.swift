@@ -12,8 +12,10 @@ import SwiftUI
 
 @Reducer
 public struct RootListItemFeature {
+
+    @ObservableState
     public struct State: Equatable {
-        @BindingState var listItem: ListItem
+        var listItem: ListItem
 
         public init(listItem: ListItem) {
             self.listItem = listItem
@@ -30,12 +32,10 @@ public struct RootListItemFeature {
 }
 
 struct RootListItem: View {
-    let store: StoreOf<RootListItemFeature>
+    @Bindable var store: StoreOf<RootListItemFeature>
 
     var body: some View {
-        WithViewStore(store, observe: { $0 }) { viewStore in
-            TextField("Untitled Todo", text: viewStore.$listItem.text )
-        }
+        TextField("Untitled Todo", text: $store.listItem.text )
     }
 }
 

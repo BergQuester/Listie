@@ -10,7 +10,7 @@ import Tagged
 
 public struct ListItem: Equatable, Identifiable {
     public let id: ID
-    public  var text: String
+    public var text: String
 
     public typealias ID = Tagged<ListItem, UUID>
 
