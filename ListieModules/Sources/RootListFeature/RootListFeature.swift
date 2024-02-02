@@ -34,7 +34,7 @@ public struct RootListFeature {
         Reduce { state, action in
             switch action {
             case .addItem:
-                state.items.append(.init(id: ListItem.ID(UUID()), text: ""))
+                state.items.append(.init(id: ListItem.ID(UUID()), text: "", complete: false))
                 return .none
             }
         }
@@ -52,7 +52,7 @@ public struct RootList: View {
         NavigationStack {
             List {
                 ForEach(store.state.items) { item in
-                    RootListItem(store: item.text)
+                    RootListItem(store: item)
                 }
             }
             .padding()
@@ -75,9 +75,9 @@ public struct RootList: View {
 #Preview {
     RootList(store: Store(
             initialState: RootListFeature.State(items: [
-                .init(id: ListItem.ID(.init()), text: "Test"),
-                .init(id: ListItem.ID(.init()), text: "Test2"),
-                .init(id: ListItem.ID(.init()), text: "Test3"),
+                .init(id: ListItem.ID(.init()), text: "Test", complete: false),
+                .init(id: ListItem.ID(.init()), text: "Test2", complete: false),
+                .init(id: ListItem.ID(.init()), text: "Test3", complete: true),
             ]),
             reducer: RootListFeature.init
         )

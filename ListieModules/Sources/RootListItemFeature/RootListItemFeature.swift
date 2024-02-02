@@ -34,7 +34,7 @@ public struct RootListItemFeature {
 public struct RootListItem: View {
     @Bindable var store: StoreOf<RootListItemFeature>
 
-    init(store: StoreOf<RootListItemFeature>) {
+    public init(store: StoreOf<RootListItemFeature>) {
         self.store = store
     }
     
