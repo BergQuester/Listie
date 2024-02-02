@@ -15,6 +15,7 @@ let package = Package(
         .macOS(.v14),
         .tvOS(.v17),
         .watchOS(.v10),
+        .visionOS(.v1)
     ],
     products: [
         .library(name: "RootListFeature", targets: ["RootListFeature"]),
