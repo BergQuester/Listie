@@ -39,13 +39,15 @@ public struct RootListItem: View {
     }
     
     public var body: some View {
-        TextField("Untitled Todo", text: $store.listItem.text )
+        Toggle(isOn: $store.listItem.complete) {
+            TextField("Untitled Todo", text: $store.listItem.text)
+        }
     }
 }
 
 extension ListItem {
     static var mock: ListItem {
-        ListItem(id: ListItem.ID(UUID()), text: "A list Item")
+        ListItem(id: ListItem.ID(UUID()), text: "A list Item", complete: false)
     }
 }
 
