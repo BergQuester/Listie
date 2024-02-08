@@ -23,7 +23,7 @@ let package = Package(
         .library(name: "Models", targets: ["Models"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.7.2"),
+        .package(url: "https://github.com/pointfreeco/swift-composable-architecture", exact: "1.7.3"),
         .package(url: "https://github.com/pointfreeco/swift-tagged.git", from: "0.10.0"),
     ],
     targets: [
