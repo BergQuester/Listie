@@ -7,6 +7,7 @@
 
 import ComposableArchitecture
 import Models
+import Tagged
 
 import SwiftUI
 
@@ -14,8 +15,9 @@ import SwiftUI
 public struct RootListItemFeature {
 
     @ObservableState
-    public struct State: Equatable {
+    public struct State: Equatable, Identifiable {
         var listItem: ListItem
+        public var id: ListItem.ID { listItem.id }
 
         public init(listItem: ListItem) {
             self.listItem = listItem
@@ -25,6 +27,8 @@ public struct RootListItemFeature {
     public enum Action: BindableAction {
         case binding(BindingAction<State>)
     }
+
+    public init() { }
 
     public var body: some ReducerOf<RootListItemFeature> {
         BindingReducer()

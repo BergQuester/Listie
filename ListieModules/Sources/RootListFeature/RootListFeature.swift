@@ -17,15 +17,16 @@ public struct RootListFeature {
 
     @ObservableState
     public struct State {
-        public var items: [ListItem]
+        public var items: IdentifiedArrayOf<RootListItemFeature.State>
 
-        public init(items: [ListItem]) {
+        public init(items: IdentifiedArrayOf<RootListItemFeature.State>) {
             self.items = items
         }
     }
 
     public enum Action {
         case addItem
+        case item(IdentifiedActionOf<RootListItemFeature>)
     }
 
     @Dependency(\.uuid) var UUID
@@ -34,9 +35,14 @@ public struct RootListFeature {
         Reduce { state, action in
             switch action {
             case .addItem:
-                state.items.append(.init(id: ListItem.ID(UUID()), text: "", complete: false))
+                state.items.append(.init(listItem: .init(id: ListItem.ID(UUID()), text: "", complete: false)))
+                return .none
+            case .item:
                 return .none
             }
+        }
+        .forEach(\.items, action: \.item) {
+            RootListItemFeature()
         }
     }
 }
@@ -51,8 +57,8 @@ public struct RootList: View {
     public var body: some View {
         NavigationStack {
             List {
-                ForEach(store.state.items) { item in
-                    RootListItem(store: item)
+                ForEach(store.scope(state: \.items, action: \.item)) { store in
+                    RootListItem(store: store)
                 }
             }
             .padding()
@@ -75,9 +81,9 @@ public struct RootList: View {
 #Preview {
     RootList(store: Store(
             initialState: RootListFeature.State(items: [
-                .init(id: ListItem.ID(.init()), text: "Test", complete: false),
-                .init(id: ListItem.ID(.init()), text: "Test2", complete: false),
-                .init(id: ListItem.ID(.init()), text: "Test3", complete: true),
+                .init(listItem: .init(id: ListItem.ID(.init()), text: "Test", complete: false)),
+                .init(listItem: .init(id: ListItem.ID(.init()), text: "Test2", complete: false)),
+                .init(listItem: .init(id: ListItem.ID(.init()), text: "Test3", complete: true)),
             ]),
             reducer: RootListFeature.init
         )
