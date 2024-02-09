@@ -26,6 +26,8 @@ public struct RootListFeature {
 
     public enum Action {
         case addItem
+        case deleteItem(RootListItemFeature.State.ID)
+        case deleteItems(IndexSet)
         case item(IdentifiedActionOf<RootListItemFeature>)
     }
 
@@ -36,6 +38,12 @@ public struct RootListFeature {
             switch action {
             case .addItem:
                 state.items.append(.init(listItem: .init(id: ListItem.ID(UUID()), text: "", complete: false)))
+                return .none
+            case let .deleteItem(id):
+                state.items.remove(id: id)
+                return .none
+            case let .deleteItems(offsets):
+                state.items.remove(atOffsets: offsets)
                 return .none
             case .item:
                 return .none
@@ -60,6 +68,7 @@ public struct RootList: View {
                 ForEach(store.scope(state: \.items, action: \.item)) { store in
                     RootListItem(store: store)
                 }
+                .onDelete { store.send(.deleteItems($0)) }
             }
             .padding()
             .toolbar {
