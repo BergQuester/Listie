@@ -43,11 +43,33 @@ public struct RootListItem: View {
     }
     
     public var body: some View {
-        Toggle(isOn: $store.listItem.complete) {
+        HStack {
             TextField("Untitled Todo", text: $store.listItem.text)
+            Toggle("Completed", isOn: $store.listItem.complete)
+                .toggleStyle(.completion)
         }
     }
 }
+
+struct CompletionToggleStyle: ToggleStyle {
+    func makeBody(configuration: Self.Configuration) -> some View {
+        Group {
+            if configuration.isOn {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.green)
+            } else {
+                Image(systemName: "checkmark.circle.fill")
+                    .foregroundColor(.gray)
+            }
+        }
+        .font(.title)
+    }
+}
+
+extension ToggleStyle where Self == CompletionToggleStyle {
+    static var completion: CompletionToggleStyle { .init() }
+}
+
 
 extension ListItem {
     static var mock: ListItem {
@@ -56,9 +78,22 @@ extension ListItem {
 }
 
 #Preview {
-    RootListItem(store:
-                    Store(initialState: RootListItemFeature.State(listItem: ListItem.mock)) {
-                    RootListItemFeature()
+    VStack {
+        RootListItem(store:
+                        Store(initialState: RootListItemFeature.State(listItem: ListItem.mock)) {
+                RootListItemFeature()
+            }
+        )
+        RootListItem(store:
+                        Store(initialState: RootListItemFeature.State(
+                            listItem: ListItem(id: RootListItemFeature.State.ID(),
+                                               text: "Another List Item",
+                                               complete: true)
+                                              )
+                              ) {
+            RootListItemFeature()
         }
-    )
+        )
+    }
+    .padding()
 }
