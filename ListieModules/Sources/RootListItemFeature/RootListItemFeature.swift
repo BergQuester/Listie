@@ -45,6 +45,14 @@ public struct RootListItem: View {
     public var body: some View {
         HStack {
             TextField("Untitled Todo", text: $store.listItem.text)
+#if os(macOS)
+            Button("\(Image(systemName: "trash.circle"))") {
+            }
+            .buttonStyle(.borderless)
+            .font(.title)
+            .foregroundColor(.red)
+#endif
+
             Toggle("Completed", isOn: $store.listItem.complete)
                 .toggleStyle(.completion)
         }
