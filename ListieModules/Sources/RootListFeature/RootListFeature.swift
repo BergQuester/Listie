@@ -16,7 +16,7 @@ public struct RootListFeature {
     public init() { }
 
     @ObservableState
-    public struct State {
+    public struct State: Equatable {
         public var items: IdentifiedArrayOf<RootListItemFeature.State>
 
         public init(items: IdentifiedArrayOf<RootListItemFeature.State>) {

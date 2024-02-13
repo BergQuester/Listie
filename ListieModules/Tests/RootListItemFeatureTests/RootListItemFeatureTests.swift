@@ -11,13 +11,19 @@ import Models
 
 import ComposableArchitecture
 
+@MainActor
+final class RootListItemFeatureTests: XCTestCase {
 
-class RootListItemFeatureTests: XCTestCase {
-
-    func testFeature() async {
+    func testEditItem() async {
         let store = TestStore(initialState: RootListItemFeature.State(listItem: ListItem.mock))
         { RootListItemFeature() }
 
+        await store.send(.binding(.set(\.listItem.text, "test"))) {
+            $0.listItem.text = "test"
+        }
 
+        await store.send(.binding(.set(\.listItem.complete, true))) {
+            $0.listItem.complete = true
+        }
     }
 }

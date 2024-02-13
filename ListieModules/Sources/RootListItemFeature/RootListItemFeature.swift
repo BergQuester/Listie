@@ -16,7 +16,7 @@ public struct RootListItemFeature {
 
     @ObservableState
     public struct State: Equatable, Identifiable {
-        var listItem: ListItem
+        public var listItem: ListItem
         public var id: ListItem.ID { listItem.id }
 
         public init(listItem: ListItem) {
