@@ -32,15 +32,18 @@ final class RootListFeatureTests: XCTestCase {
 
         // Add a second item
         await store.send(.addItem) {
-            $0.items = [
-                RootListItemFeature.State(listItem: ListItem(id: .init(UUID(0)),
-                                                             text: "",
-                                                             complete: false)),
-                RootListItemFeature.State(listItem: ListItem(id: .init(UUID(1)),
-                                                             text: "",
-                                                             complete: false))
-            ]
+            $0.items.append(RootListItemFeature.State(listItem: ListItem(id: .init(UUID(1)),
+                                                                         text: "",
+                                                                         complete: false)))
         }
+
+        // Add a third item
+        await store.send(.addItem) {
+            $0.items.append(RootListItemFeature.State(listItem: ListItem(id: .init(UUID(2)),
+                                                                         text: "",
+                                                                         complete: false)))
+        }
+
 
         // Title Item
         await store.send(.item(.element(id: .init(UUID(0)), action: .set(\.listItem.text, "My wonderful to do item")))) {
@@ -50,6 +53,16 @@ final class RootListFeatureTests: XCTestCase {
         // complete item
         await store.send(.item(.element(id: .init(UUID(0)), action: .set(\.listItem.complete, true)))) {
             $0.items[0].listItem.complete = true
+        }
+
+        // delete delegate
+        await store.send(.item(.element(id: .init(UUID(1)), action: .delegate(.delete)))) {
+            $0.items.remove(at: 1)
+        }
+
+        // Delete offsets
+        await store.send(.deleteItems(IndexSet(integer: 0))) {
+            $0.items.remove(at: 0)
         }
     }
 }

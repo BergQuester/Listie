@@ -45,6 +45,9 @@ public struct RootListFeature {
             case let .deleteItems(offsets):
                 state.items.remove(atOffsets: offsets)
                 return .none
+            case let .item(.element(id: id, action: .delegate)):
+                state.items.remove(id: id)
+                return .none
             case .item:
                 return .none
             }

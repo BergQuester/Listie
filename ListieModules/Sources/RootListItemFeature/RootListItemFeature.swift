@@ -26,6 +26,11 @@ public struct RootListItemFeature {
 
     public enum Action: BindableAction {
         case binding(BindingAction<State>)
+        case delegate(Delegate)
+
+        public enum Delegate {
+            case delete
+        }
     }
 
     public init() { }
@@ -47,6 +52,7 @@ public struct RootListItem: View {
             TextField("Untitled Todo", text: $store.listItem.text)
 #if os(macOS)
             Button("\(Image(systemName: "trash.circle"))") {
+                store.send(.delegate(.delete))
             }
             .buttonStyle(.borderless)
             .font(.title)
