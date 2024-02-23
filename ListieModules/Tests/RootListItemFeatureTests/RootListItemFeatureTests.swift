@@ -18,11 +18,11 @@ final class RootListItemFeatureTests: XCTestCase {
         let store = TestStore(initialState: RootListItemFeature.State(listItem: ListItem.mock))
         { RootListItemFeature() }
 
-        await store.send(.binding(.set(\.listItem.text, "test"))) {
+        await store.send(.set(\.listItem.text, "test")) {
             $0.listItem.text = "test"
         }
 
-        await store.send(.binding(.set(\.listItem.complete, true))) {
+        await store.send(.set(\.listItem.complete, true)) {
             $0.listItem.complete = true
         }
     }
