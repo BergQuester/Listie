@@ -50,7 +50,7 @@ public struct RootListItem: View {
     public var body: some View {
         HStack {
             TextField("Untitled Todo", text: $store.listItem.text)
-#if os(macOS)
+#if os(macOS) || os(tvOS)
             Button("\(Image(systemName: "trash.circle"))") {
                 store.send(.delegate(.delete))
             }
