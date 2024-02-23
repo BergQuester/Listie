@@ -67,16 +67,21 @@ public struct RootListItem: View {
 
 struct CompletionToggleStyle: ToggleStyle {
     func makeBody(configuration: Self.Configuration) -> some View {
-        Group {
-            if configuration.isOn {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.green)
-            } else {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundColor(.gray)
+        Button {
+            configuration.isOn.toggle()
+        } label: {
+            Group {
+                if configuration.isOn {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.green)
+                } else {
+                    Image(systemName: "checkmark.circle.fill")
+                        .foregroundColor(.gray)
+                }
             }
+            .font(.title)
         }
-        .font(.title)
+        .buttonStyle(.borderless)
     }
 }
 
