@@ -31,10 +31,6 @@ public struct RootList: View {
             .toolbar {
                 ToolbarItemGroup {
                     HStack {
-                        Button(action: { }) {
-                            Label("Delete Item", systemImage: "minus")
-                        }
-
                         Button(action: { store.send(.addItem) }) {
                             Label("Add Item", systemImage: "plus")
                         }
